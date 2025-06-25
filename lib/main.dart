@@ -33,6 +33,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   double touchX = 0;
   double touchY = 0;
+  double cardWidth = 300;
+  double cardHeight = 400;
 
   @override
   Widget build(BuildContext context) {
@@ -47,13 +49,23 @@ class _MyHomePageState extends State<MyHomePage> {
           child: GestureDetector(
             onPanUpdate: (details) {
               setState(() {
-                touchX = details.localPosition.dx;
-                touchY = details.localPosition.dy;
+                if (details.localPosition.dx < cardWidth * 0.55 &&
+                    details.localPosition.dx > cardWidth * 0.3) {
+                  touchX = (cardWidth / 2 - details.localPosition.dx) / 100;
+                }
+
+                ///x轴限制范围
+                if (details.localPosition.dy > cardHeight * 0.4 &&
+                    details.localPosition.dy < cardHeight * 0.6) {
+                  touchY = (details.localPosition.dy - cardHeight / 2) / 100;
+                }
+                // touchX = (cardWidth / 2 - details.localPosition.dx) / 180;
+                // touchY = (details.localPosition.dy - cardHeight / 2) / 180;
               });
             },
             child: Container(
-              width: 300,
-              height: 400,
+              width: cardWidth,
+              height: cardHeight,
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 color: const Color.fromARGB(255, 47, 153, 253),
