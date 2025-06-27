@@ -1,6 +1,8 @@
 # study_flutter
 
 A new Flutter project.
+use flutter 3.24.5
+java 17.0.13
 
 ## Getting Started
 
